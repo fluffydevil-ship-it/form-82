@@ -1,0 +1,17 @@
+{
+  "name": "FORM 82 \u2013 Home Workout",
+  "short_name": "FORM 82",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#101310",
+  "theme_color": "#101310",
+  "description": "Personal home strength training programme and progress tracker.",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

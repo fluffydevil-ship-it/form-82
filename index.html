@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101310">
+<meta name="description" content="Your personal home strength training programme and progress tracker.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>FORM 82</title>
+<style>
+:root{color-scheme:dark;--bg:#101310;--panel:#1a201b;--panel2:#232b24;--line:#344037;--text:#f3f6f1;--muted:#aab5aa;--green:#b6ff38;--green2:#83c91e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{padding:24px 18px 16px;background:linear-gradient(145deg,#202a20,#101310);border-bottom:1px solid var(--line)}
+.brand{color:var(--green);font-size:12px;letter-spacing:.22em;font-weight:800}.headrow{display:flex;justify-content:space-between;align-items:center;gap:12px}h1{font-size:32px;margin:5px 0 2px;letter-spacing:-.04em}.sub{color:var(--muted);font-size:14px}
+main{max-width:760px;margin:auto;padding:16px 14px 100px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:15px 0}.stat,.card{background:var(--panel);border:1px solid var(--line);border-radius:16px}.stat{padding:12px}.stat strong{display:block;font-size:21px}.stat span{color:var(--muted);font-size:11px}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}.tab,button{border:1px solid var(--line);border-radius:12px;background:var(--panel2);color:var(--text);padding:11px 12px;font:inherit;font-weight:650}.tab.active,button.primary{background:var(--green);border-color:var(--green);color:#15200c}.sectiontop{display:flex;justify-content:space-between;align-items:end;gap:10px;margin:18px 2px 12px}.sectiontop h2{margin:0;font-size:21px}.muted{color:var(--muted);font-size:13px}
+.exercise{padding:14px;margin:10px 0}.exhead{display:flex;gap:12px;align-items:center}.art{width:76px;height:76px;flex:0 0 76px;border-radius:13px;background:#273329;display:grid;place-items:center;color:var(--green);font-size:30px}.exname{font-size:16px;font-weight:750}.tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:5px}.tag{font-size:11px;border-radius:30px;padding:4px 8px;background:#29352a;color:#d9f5c2}.details{margin-top:12px;color:#d6ddd4;font-size:14px}.details ol{padding-left:20px;margin:7px 0}.details li{margin:4px 0}.row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:12px}.check{display:flex;align-items:center;gap:8px;color:var(--green);font-size:13px;font-weight:700}.check input{width:20px;height:20px;accent-color:var(--green)}.progress{height:8px;border-radius:20px;background:#303a31;overflow:hidden;margin:8px 0 15px}.progress i{display:block;height:100%;background:var(--green);width:0}.card{padding:15px;margin:12px 0}.field{display:grid;grid-template-columns:1fr 1fr;gap:10px}.field label{font-size:12px;color:var(--muted)}input[type=number]{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:#111711;color:white;font:inherit;margin-top:5px}
+button{cursor:pointer}button:active{transform:scale(.98)}.wide{width:100%;margin-top:8px}.history{font-size:13px;color:var(--muted);padding:8px 0;border-bottom:1px solid var(--line)}.foot{color:var(--muted);font-size:12px;line-height:1.5;margin:22px 4px}.hidden{display:none}
+@media(min-width:600px){main{padding:24px}.exercise{padding:18px}.art{width:90px;height:90px;flex-basis:90px}}
+</style>
+</head>
+<body>
+<header><div class="headrow"><div><div class="brand">PERSONAL TRAINING / HOME EDITION</div><h1>FORM 82</h1><div class="sub">Build strength. Track progress. Stay consistent.</div></div><div style="font-size:34px">✳</div></div></header>
+<main>
+<div class="stats">
+ <div class="stat"><strong>87 kg</strong><span>STARTING WEIGHT</span></div>
+ <div class="stat"><strong>82 kg</strong><span>FIRST MILESTONE</span></div>
+ <div class="stat"><strong>3×</strong><span>SESSIONS / WEEK</span></div>
+</div>
+<div class="sectiontop"><div><h2 id="dayTitle">Monday · Upper body</h2><div class="muted" id="focus">Chest, shoulders and back · about 35 min</div></div><div class="muted" id="count">0 / 5 done</div></div>
+<div class="progress"><i id="bar"></i></div>
+<nav class="tabs">
+ <button class="tab active" data-day="0">MON · A</button><button class="tab" data-day="1">WED · B</button><button class="tab" data-day="2">FRI · C</button>
+</nav>
+<div id="exercises"></div>
+<section class="card">
+ <h2 style="margin:0 0 10px">Progress check-in</h2>
+ <div class="field">
+  <label>Weight (kg)<input id="weight" type="number" step=".1" placeholder="87"></label>
+  <label>Waist (cm)<input id="waist" type="number" step=".1" placeholder="Measure at navel"></label>
+ </div>
+ <button class="primary wide" id="save">Save measurement</button>
+ <div id="history" style="margin-top:10px"></div>
+</section>
+<section class="card">
+ <h2 style="margin:0 0 6px">Your equipment</h2>
+ <div class="muted">Pair of 10 kg dumbbells · pair of 13 kg dumbbells · doorway pull-up bar · mat</div>
+</section>
+<p class="foot">Training guidance: warm up for 5 minutes, rest 60–90 seconds between sets and keep 2–3 good repetitions in reserve. Choose a lighter load or bodyweight if the suggested weight compromises your form. With MS, adapt to fatigue, avoid overheating and stop for unusual or persistent neurological symptoms. Make sure your pull-up bar is securely fitted and rated for your weight.</p>
+</main>
+<script>
+const plans=[
+{title:"Monday · Upper body",focus:"Chest, shoulders and back · about 35 min",items:[
+["Dumbbell floor press","10 kg each","3 × 12","Lie on your back with knees bent. Start with weights above your chest. Lower until upper arms gently touch the floor, then press up.","Chest + triceps","💪"],
+["Bent-over dumbbell row","Start 10 kg each; try 13 kg if controlled","3 × 10","Hinge at the hips with a neutral back. Let weights hang below shoulders, pull towards your waist, then lower slowly.","Back + lats","↗"],
+["Shoulder press","Try 5 kg if available; 10 kg only if controlled","3 × 8","Start at shoulder height. Brace your abdomen and press overhead without arching your lower back.","Shoulders + triceps","⬆"],
+["Lateral raises","Bodyweight initially; light weights only","2 × 12","Stand tall and raise arms out to the sides to shoulder height with soft elbows. Lower slowly. 10 kg is too heavy for most beginners here.","Side shoulders","↔"],
+["Dead bug","Bodyweight","2 × 10 each side","Lie on your back, arms up and knees bent at 90 degrees. Extend opposite arm and leg while keeping your lower back controlled.","Deep core","✳"]
+]},
+{title:"Wednesday · Lower body",focus:"Legs and abdomen · about 35 min",items:[
+["Goblet squat","10 kg initially; progress to 13 kg","3 × 12","Hold one dumbbell close to your chest. Sit hips down and back, keep heels grounded and stand smoothly.","Quads + glutes","⬇"],
+["Romanian deadlift","10 kg each","3 × 10","Hold weights in front of thighs. Keep knees softly bent, push hips back and slide weights down your legs. Stand by bringing hips forward.","Hamstrings + glutes","↘"],
+["Reverse lunges","Bodyweight initially","2 × 8 each leg","Step one foot back, lower only as far as balance and comfort allow, then push through the front foot. Hold a stable support if needed.","Legs + glutes","↶"],
+["Glute bridge","Bodyweight first; then 10 kg padded across hips","3 × 12–15","Lie on your back with knees bent. Squeeze glutes to lift hips; avoid over-arching your lower back.","Glutes","⬆"],
+["Plank","Bodyweight; knees down if needed","3 × 20–25 sec","Support on forearms and toes or knees. Keep a straight line, breathe normally and stop before form breaks.","Core stability","━"],
+["Bird dog","Bodyweight","2 × 8 each side","On all fours, extend opposite arm and leg. Keep hips level, pause briefly, return and switch sides.","Core + coordination","✳"]
+]},
+{title:"Friday · Upper body",focus:"Chest, back and arms · about 35 min",items:[
+["Dumbbell floor press","10 kg each; try 13 kg only if controlled","3 × 8","Lie on your back and press from chest level. Lower under control until upper arms touch the floor.","Chest + triceps","💪"],
+["Single-arm dumbbell row","10 kg initially; 13 kg if controlled","3 × 10–12 each","Support one hand on a sturdy chair or bench. Keep back neutral and pull weight towards your hip.","Back + lats","↗"],
+["Bicep curls","Use a lighter weight if available; 10 kg may be too heavy","2 × 8–10","Keep elbows by your sides. Curl without swinging your torso, then lower slowly.","Biceps","↟"],
+["Triceps extension","Start light; one dumbbell held with both hands","2 × 10–12","Hold one dumbbell overhead with both hands. Bend elbows to lower behind head, then extend. Keep elbows comfortable.","Triceps","⬆"],
+["Reverse fly","Bodyweight or very light weights","2 × 12","Hinge forward with neutral back. Open arms out to the sides with soft elbows, then lower slowly.","Rear shoulders + upper back","↔"],
+["Pull-ups / assisted pulls","Bodyweight or safe foot assistance","3 × 3–5","Use only a securely installed, weight-rated bar. Pull smoothly and lower with control. If you cannot do these safely, substitute another row.","Lats + biceps","↑"]
+]}];
+let day=0,done=JSON.parse(localStorage.getItem("f82_done")||"{}");
+function render(){
+ const p=plans[day], checks=done[day]||[];
+ document.getElementById("dayTitle").textContent=p.title;
+ document.getElementById("focus").textContent=p.focus;
+ document.getElementById("count").textContent=`${checks.filter(Boolean).length} / ${p.items.length} done`;
+ document.getElementById("bar").style.width=(checks.filter(Boolean).length/p.items.length*100)+"%";
+ document.querySelectorAll(".tab").forEach((b,i)=>b.classList.toggle("active",i===day));
+ document.getElementById("exercises").innerHTML=p.items.map((e,i)=>`<article class="card exercise"><div class="exhead"><div class="art" aria-hidden="true">${e[5]}</div><div><div class="exname">${e[0]}</div><div class="tags"><span class="tag">${e[1]}</span><span class="tag">${e[2]}</span></div><div class="muted" style="margin-top:5px">${e[4]}</div></div></div><div class="details">${e[3]}</div><div class="row"><label class="check"><input type="checkbox" data-i="${i}" ${checks[i]?"checked":""}> Mark complete</label><span class="muted">Exercise ${i+1}/${p.items.length}</span></div></article>`).join("");
+ document.querySelectorAll("[data-i]").forEach(el=>el.addEventListener("change",()=>{const a=done[day]||[];a[+el.dataset.i]=el.checked;done[day]=a;localStorage.setItem("f82_done",JSON.stringify(done));render()}));
+}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{day=+b.dataset.day;render()}));
+let history=JSON.parse(localStorage.getItem("f82_history")||"[]");
+function showHistory(){document.getElementById("history").innerHTML=history.slice(0,8).map(x=>`<div class="history">${x.date} · ${x.weight||"—"} kg · waist ${x.waist||"—"} cm</div>`).join("")}
+document.getElementById("save").addEventListener("click",()=>{const w=document.getElementById("weight").value,wa=document.getElementById("waist").value;if(!w&&!wa)return;history.unshift({date:new Date().toLocaleDateString(),weight:w,waist:wa});localStorage.setItem("f82_history",JSON.stringify(history));showHistory();document.getElementById("weight").value="";document.getElementById("waist").value=""});
+showHistory();render();
+if("serviceWorker" in navigator && location.protocol!=="file:"){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
+</script>
+</body></html>
